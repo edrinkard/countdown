@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Countdown</title>
+    <link rel="icon" type="image/x-icon" href="https://rebels.cx/rebicon.png">
+
+  <script src="https://kit.fontawesome.com/a6a679dd0e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style2.css">
+  <script src="/cdn-cgi/apps/head/-_0rOTlWRH0SHyNoMn1S5e8pSNQ.js"></script><script src="https://kit.fontawesome.com/a6a679dd0e.js" crossorigin="anonymous"></script>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Shift Countdown <i class="fa-solid fa-stopwatch" style="color: #ffffff;"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+  
+            </li>
+        </ul>
+    </div>
+</nav>
+  
+  </div>
+</div><P><BR>
+<P><BR>
+<!-- partial:index.partial.html -->
+<div class="mb-3">
+  <center>
+    <div class="hours" style="font-size:54px">
+      You have <br>
+      <span style="font-size:54px" id='time'></span> <br>
+      left in your shift <i class="fa-solid fa-hourglass-clock"></i>
+    </div>
+  </center>
+
+  <div class="message" style="display: none">
+    Sorry, this feature is available only during working hours.
+  </div>
+
+  <center>
+    <div class="time-selector" style="display: none">
+      <h3><P><P><P><P><P>This application has been updated to allow the user to select their own time for their shift ending. <br>This is
+        based on your machine's local time.</h3>
+        
+      <label for="timePicker">Select Your Clockout Time:</label><P>
+      <input type="time" id="timePicker">
+     <P><BR></BR> <button onclick="startTimer()" class="btn btn-primary">Start Timer</button>
+    </div>
+  </center>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+  function showTimeSelector() {
+    $(".hours").hide();
+    $(".message").hide();
+    $(".time-selector").show();
+  }
+
+  function startTimer() {
+    var selectedTimeStr = $("#timePicker").val();
+    var selectedTime = new Date("2000-01-01T" + selectedTimeStr + ":00");
+
+    var now = new Date();
+    var start = new Date(now);
+
+    start.setHours(selectedTime.getHours(), selectedTime.getMinutes(), 0);
+
+    if (now > start) {
+      // If the selected time is in the past, move to tomorrow
+      start.setDate(start.getDate() + 1);
+    }
+
+    function pad(num) {
+      return ("0" + parseInt(num)).substr(-2);
+    }
+
+    function tick() {
+      var now = new Date();
+      var remain = ((start - now) / 1000);
+
+      if (remain <= 0) {
+        document.getElementById('time').innerHTML = "ZERO";
+        return;
+      }
+
+      var hh = pad((remain / 60 / 60) % 60);
+      var mm = pad((remain / 60) % 60);
+      var ss = pad(remain % 60);
+      document.getElementById('time').innerHTML =
+        hh + " hours, " + mm + " minutes and " + ss + " seconds";
+      setTimeout(tick, 1000);
+    }
+
+    $(".hours").show();
+    $(".message").hide();
+    $(".time-selector").hide();
+    document.getElementById('time').innerHTML = "Loading time from the Rebel Alliance";
+    setTimeout(tick, 1000);
+  }
+
+  var d = new Date();
+  if (d.getHours() >= 0 && d.getHours() <= 24) {
+    showTimeSelector();
+  } else {
+    $(".hours").hide();
+    $(".message").show();
+    $(".time-selector").hide();
+  }
+</script>
+      <i class="fa-solid fa-hourglass-clock" style="color: #000000;"></i>
+      
+      
+<!-- partial -->
+  <nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <div class="container-fluid">        <button type"button" class="btn btn-dark" id="darkModeToggle"><i class="fa-regular fa-star-half-stroke fa-beat-fade" style="color: #8c8c8c;"></i></button>
+    <a class="navbar-brand" href="#">Made with ☕ by Eric Drinkard</a>
+  </div>
+          <script src="script2.js"></script>
+</nav>
+</body>
+</html>
